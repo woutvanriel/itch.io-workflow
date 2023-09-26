@@ -1,0 +1,212 @@
+name: test, build and push the application to itch.io
+run-name: build for ${{ github.actor }}, ${{ github.event.head_commit.message }}
+on:
+  push:
+    branches: main
+  workflow_dispatch: {}
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout main
+      with:
+        lfs: true
+    - uses: actions/cache@v2
+      name: Cache main
+      with:
+        path: ${{ matrix.projectPath }}/Library
+        key: Library-${{ matrix.projectPath }}
+        restore-keys: |
+          Library-
+    - name: Run tests
+      id: tests
+      uses: game-ci/unity-test-runner@v3
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL  }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD  }}
+      with:
+        projectPath: ${{ env.PROJECT_PATH }}
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: Test results
+        path: ${{ steps.tests.outputs.artifactsPath }}
+    - name: Upload coverage artifacts
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: Coverage results
+        path: ${{ steps.tests.outputs.coveragePath }}
+  build-webgl:
+    name: Build WebGL
+    runs-on: ubuntu-latest
+    needs: test
+    steps: 
+    - uses: actions/checkout@v2
+      name: Checkout main
+      with:
+        lfs: true
+    - uses: actions/cache@v2
+      name: Cache main
+      with:
+        path: ${{ matrix.projectPath }}/Library
+        key: Library-${{ matrix.projectPath }}
+        restore-keys: |
+          Library-
+    - uses: game-ci/unity-builder@v3
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL  }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD  }}
+      with:
+        targetPlatform: WebGL
+        projectPath: ${{ env.PROJECT_PATH }}
+        allowDirtyBuild: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: WebGL build
+        path: build/WebGL
+  build-windows:
+    name: Build Windows
+    runs-on: ubuntu-latest
+    needs: test
+    steps: 
+    - uses: actions/checkout@v2
+      name: Checkout main
+      with:
+        lfs: true
+    - uses: actions/cache@v2
+      name: Cache main
+      with:
+        path: ${{ matrix.projectPath }}/Library
+        key: Library-${{ matrix.projectPath }}
+        restore-keys: |
+          Library-
+    - uses: game-ci/unity-builder@v3
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL  }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD  }}
+      with:
+        targetPlatform: StandaloneWindows
+        projectPath: ${{ env.PROJECT_PATH }}
+        allowDirtyBuild: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Windows build
+        path: build/StandaloneWindows
+  build-macos:
+    name: Build MacOS
+    runs-on: ubuntu-latest
+    needs: test
+    steps: 
+    - uses: actions/checkout@v2
+      name: Checkout main
+      with:
+        lfs: true
+    - uses: actions/cache@v2
+      name: Cache main
+      with:
+        path: ${{ matrix.projectPath }}/Library
+        key: Library-${{ matrix.projectPath }}
+        restore-keys: |
+          Library-
+    - uses: game-ci/unity-builder@v3
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL  }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD  }}
+      with:
+        targetPlatform: StandaloneOSX
+        projectPath: ${{ env.PROJECT_PATH }}
+        allowDirtyBuild: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: MacOS build
+        path: build/StandaloneOSX
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    needs: test
+    steps: 
+    - uses: actions/checkout@v2
+      name: Checkout main
+      with:
+        lfs: true
+    - uses: actions/cache@v2
+      name: Cache main
+      with:
+        path: ${{ matrix.projectPath }}/Library
+        key: Library-${{ matrix.projectPath }}
+        restore-keys: |
+          Library-
+    - uses: game-ci/unity-builder@v3
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL  }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD  }}
+      with:
+        targetPlatform: StandaloneLinux64
+        projectPath: ${{ env.PROJECT_PATH }}
+        allowDirtyBuild: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Linux build
+        path: build/StandaloneLinux64
+  publish-itch:
+    name: Publish to itch.io
+    runs-on: ubuntu-latest
+    needs: [build-webgl, build-linux, build-windows, build-macos]
+    steps:
+    - uses: actions/download-artifact@v2.0.8
+      name: Download WebGL build
+      with:
+        name: WebGL build
+        path: build/webgl
+    - uses: actions/download-artifact@v2.0.8
+      name: Download Linux build
+      with:
+        name: Linux build
+        path: build/linux
+    - uses: actions/download-artifact@v2.0.8
+      name: Download Windows build
+      with:
+        name: Windows build
+        path: build/windows
+    - uses: actions/download-artifact@v2.0.8
+      name: Download MacOS build
+      with:
+        name: MacOS build
+        path: build/macos
+    - name: Itch.io - Publish Linux
+      uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerAPIKey: ${{ secrets.ITCH_KEY }}
+        gameData: ./build/linux
+        itchUsername: zerofox-studio
+        itchGameId: masked-guardian-of-the-elemental-wilds
+        buildChannel: linux
+        buildNumber: ${{ needs.version.outputs.version_hash }}
+    - name: Itch.io - Publish MacOS
+      uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerAPIKey: ${{ secrets.ITCH_KEY }}
+        gameData: ./build/macos
+        itchUsername: zerofox-studio
+        itchGameId: masked-guardian-of-the-elemental-wilds
+        buildChannel: macos
+        buildNumber: ${{ needs.version.outputs.version_hash }}
+    - name: Itch.io - Publish WebGL
+      uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerAPIKey: ${{ secrets.ITCH_KEY }}
+        gameData: ./build/webgl
+        itchUsername: zerofox-studio
+        itchGameId: masked-guardian-of-the-elemental-wilds
+        buildChannel: HTML5
+        buildNumber: ${{ needs.version.outputs.version_hash }}
