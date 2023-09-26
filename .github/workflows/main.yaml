@@ -183,13 +183,22 @@ jobs:
       with:
         name: MacOS build
         path: build/macos
+    - name: Itch.io - Publish Windows
+      uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerAPIKey: ${{ secrets.ITCH_KEY }}
+        gameData: ./build/windows
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
+        buildChannel: windows
+        buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish Linux
       uses: KikimoraGames/itch-publish@v0.0.3
       with:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/linux
-        itchUsername: zerofox-studio
-        itchGameId: masked-guardian-of-the-elemental-wilds
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
         buildChannel: linux
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish MacOS
@@ -197,8 +206,8 @@ jobs:
       with:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/macos
-        itchUsername: zerofox-studio
-        itchGameId: masked-guardian-of-the-elemental-wilds
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
         buildChannel: macos
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish WebGL
@@ -206,7 +215,7 @@ jobs:
       with:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/webgl
-        itchUsername: zerofox-studio
-        itchGameId: masked-guardian-of-the-elemental-wilds
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
         buildChannel: HTML5
         buildNumber: ${{ needs.version.outputs.version_hash }}
