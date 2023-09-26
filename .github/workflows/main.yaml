@@ -70,7 +70,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: WebGL build
-        path: build/WebGL
+        path: build/WebGL/WebGL
   build-windows:
     name: Build Windows
     runs-on: ubuntu-latest
