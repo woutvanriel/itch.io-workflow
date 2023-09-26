@@ -28,7 +28,7 @@ jobs:
         UNITY_EMAIL: ${{ secrets.UNITY_EMAIL  }}
         UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD  }}
       with:
-        projectPath: ${{ matrix.projectPath }}${{ env.PROJECT_PATH }}
+        projectPath: ${{ env.PROJECT_PATH }}
         githubToken: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload test artifacts
       uses: actions/upload-artifact@v2
