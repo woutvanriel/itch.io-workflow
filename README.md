@@ -29,7 +29,7 @@ To set or change these, navigate to the settings tab on the top of your reposito
 - ITCH_KEY, the itch.io butler api key (can be generated here: https://itch.io/user/settings/api-keys).
 - UNITY_EMAIL, the email you use to log in to the Unity website.
 - UNITY_PASSWORD, the password you use to log in to the Unity website (used to validate the unity license, not shared in the project).
-- UNITY_LICENSE, the Unity license file, instructions to generage these can be found at [Unity license activation](generating-a-license-request-file).
+- UNITY_LICENSE, the Unity license file, instructions to generage these can be found at [Unity license activation](#generating-a-license-request-file).
 
 # License activation
 ## Generating a license request file
