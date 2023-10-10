@@ -30,3 +30,4 @@ To set or change these, navigate to the settings tab on the top of your reposito
 - UNITY_EMAIL, the email you use to log in to the Unity website.
 - UNITY_PASSWORD, the password you use to log in to the Unity website (used to validate the unity license, not shared in the project).
 - UNITY_LICENSE, the Unity license file, instructions to generage these can be found at Unity license activation.
+
