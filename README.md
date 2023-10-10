@@ -21,8 +21,6 @@ Other variables that are not sensitive such as what itch.io page to push to are 
 To set or change these, navigate to the settings tab on the top of your repository, and head to the "Actions" menu under the "Secrets and variables" tab.
 
 ## Variables
-- ITCH_GAMEID, the name of the itch.io game page to push to, as noted in the url (so for https://woutvanriel.itch.io/itchio-workflow, it would be itchio-workflow).
-- ITCH_USERNAME, the name of the itch.io user to push to, as noted in the url (so for https://woutvanriel.itch.io/itchio-workflow, it would be woutvanriel).
 - PROJECT_PATH, the path where the unity project is located, I reccomend keeping it as "./" and placing your project in the root folder.
 
 ## Secrets
@@ -30,6 +28,11 @@ To set or change these, navigate to the settings tab on the top of your reposito
 - UNITY_EMAIL, the email you use to log in to the Unity website.
 - UNITY_PASSWORD, the password you use to log in to the Unity website (used to validate the unity license, not shared in the project).
 - UNITY_LICENSE, the Unity license file, instructions to generage these can be found at [Unity license activation](#generating-a-license-request-file).
+
+## Itch.io variables
+Due to limitations with the actions used, the itch.io username and game id cannot be saved as variables. In order to set these properly, edit the pipeline workflow files and replace the following variables: 
+- "woutvanriel" with your own username, as noted in the url (so for https://woutvanriel.itch.io/itchio-workflow, it would be woutvanriel).
+- "itchio-workflow" with the name of the itch.io game page to push to, as noted in the url (so for https://woutvanriel.itch.io/itchio-workflow, it would be itchio-workflow).
 
 # License activation
 ## Generating a license request file
