@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}${{ env.PROJECT_PATH }}Library
         key: Library-${{ matrix.projectPath }}
@@ -48,11 +48,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
@@ -77,11 +77,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
@@ -106,11 +106,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
@@ -135,11 +135,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
