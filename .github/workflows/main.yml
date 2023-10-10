@@ -189,7 +189,7 @@ jobs:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/windows
         itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.GAMEID }}
+        itchGameId: ${{ env.ITCH_GAMEID }}
         buildChannel: windows
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish Linux
@@ -198,7 +198,7 @@ jobs:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/linux
         itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.GAMEID }}
+        itchGameId: ${{ env.ITCH_GAMEID }}
         buildChannel: linux
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish MacOS
@@ -207,7 +207,7 @@ jobs:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/macos
         itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.GAMEID }}
+        itchGameId: ${{ env.ITCH_GAMEID }}
         buildChannel: macos
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish WebGL
@@ -216,6 +216,6 @@ jobs:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/webgl
         itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.GAMEID }}
+        itchGameId: ${{ env.ITCH_GAMEID }}
         buildChannel: HTML5
         buildNumber: ${{ needs.version.outputs.version_hash }}
