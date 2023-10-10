@@ -30,7 +30,7 @@ To set or change these, navigate to the settings tab on the top of your reposito
 - UNITY_LICENSE, the Unity license file, instructions to generage these can be found at [Unity license activation](#generating-a-license-request-file).
 
 ## Itch.io variables
-Due to limitations with the actions used, the itch.io username and game id cannot be saved as variables. In order to set these properly, edit the pipeline workflow files and replace the following variables: 
+Due to limitations with the actions used, the itch.io username and game id cannot be saved as variables. In order to set these properly, edit the main.yml in the .github/workflow folder and replace the following variables: 
 - "woutvanriel" with your own username, as noted in the url (so for https://woutvanriel.itch.io/itchio-workflow, it would be woutvanriel).
 - "itchio-workflow" with the name of the itch.io game page to push to, as noted in the url (so for https://woutvanriel.itch.io/itchio-workflow, it would be itchio-workflow).
 
