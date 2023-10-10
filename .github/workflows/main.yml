@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}${{ env.PROJECT_PATH }}Library
         key: Library-${{ matrix.projectPath }}
@@ -48,11 +48,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
@@ -77,11 +77,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
@@ -106,11 +106,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
@@ -135,11 +135,11 @@ jobs:
     needs: test
     steps: 
     - uses: actions/checkout@v2
-      name: Checkout main
+      name: Checkout
       with:
         lfs: true
     - uses: actions/cache@v2
-      name: Cache main
+      name: Cache
       with:
         path: ${{ matrix.projectPath }}/Library
         key: Library-${{ matrix.projectPath }}
@@ -188,8 +188,8 @@ jobs:
       with:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/windows
-        itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.ITCH_GAMEID }}
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
         buildChannel: windows
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish Linux
@@ -197,8 +197,8 @@ jobs:
       with:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/linux
-        itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.ITCH_GAMEID }}
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
         buildChannel: linux
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish MacOS
@@ -206,8 +206,8 @@ jobs:
       with:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/macos
-        itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.ITCH_GAMEID }}
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
         buildChannel: macos
         buildNumber: ${{ needs.version.outputs.version_hash }}
     - name: Itch.io - Publish WebGL
@@ -215,7 +215,7 @@ jobs:
       with:
         butlerAPIKey: ${{ secrets.ITCH_KEY }}
         gameData: ./build/webgl
-        itchUsername: ${{ env.ITCH_USERNAME }}
-        itchGameId: ${{ env.ITCH_GAMEID }}
+        itchUsername: woutvanriel
+        itchGameId: itchio-workflow
         buildChannel: HTML5
         buildNumber: ${{ needs.version.outputs.version_hash }}
