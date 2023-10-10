@@ -97,3 +97,11 @@ The "test the application" pipeline is ran on any new push to dev.
 
 # Unused pipeline jobs
 If there are jobs you don't intend to use, remove them from the .yml files. The workflow files can be found in the .github/workflows folder, or under the Actions tab when selecting a pipeline. I suggest editing the .yml files in a text editor and pushing them to a featur branch, then manually activating them manually to test before merging to dev, then main.
+
+# Extra tools and documentation
+- [Unity code coverage batch docs](https://docs.unity3d.com/Packages/com.unity.testtools.codecoverage@1.1/manual/CoverageBatchmode.html).
+- [GameCI documentation](https://game.ci/docs/github/getting-started).
+- [itch.io butler documentation](https://itch.io/docs/butler/).
+- [Unity test package documentation](https://docs.unity3d.com/Manual/cus-tests.html).
+- [Unity unit test tutorial](https://www.kodeco.com/9454-introduction-to-unity-unit-testing).
+- [GitHub Actions itch.io actions](https://github.com/marketplace/actions/itch-io-publish).
