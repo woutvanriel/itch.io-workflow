@@ -11,8 +11,6 @@ jobs:
     steps:
     - uses: nschloe/action-cached-lfs-checkout@v1
       name: Checkout
-      with:
-        lfs: true
     - uses: actions/cache@v2
       name: Cache
       with:
@@ -49,8 +47,6 @@ jobs:
     steps: 
     - uses: nschloe/action-cached-lfs-checkout@v1
       name: Checkout
-      with:
-        lfs: true
     - uses: actions/cache@v2
       name: Cache
       with:
@@ -78,8 +74,6 @@ jobs:
     steps: 
     - uses: nschloe/action-cached-lfs-checkout@v1
       name: Checkout
-      with:
-        lfs: true
     - uses: actions/cache@v2
       name: Cache
       with:
@@ -107,8 +101,6 @@ jobs:
     steps: 
     - uses: nschloe/action-cached-lfs-checkout@v1
       name: Checkout
-      with:
-        lfs: true
     - uses: actions/cache@v2
       name: Cache
       with:
@@ -136,8 +128,6 @@ jobs:
     steps: 
     - uses: nschloe/action-cached-lfs-checkout@v1
       name: Checkout
-      with:
-        lfs: true
     - uses: actions/cache@v2
       name: Cache
       with:
