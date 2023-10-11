@@ -10,10 +10,8 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: nschloe/action-cached-lfs-checkout@v1
       name: Checkout
-      with:
-        lfs: true
     - uses: actions/cache@v2
       name: Cache
       with:
